@@ -3,14 +3,17 @@ import java.nio.file.Path;
 import java.nio.file.Files;
 import java.util.ArrayList;
 
-public class YearManager {
+public class YearlyReport {
     public Year year;
 
-    public YearManager() {
+    public YearlyReport() {
     }
 
-    public YearManager(String path) { // путь к одному файлу
+    public YearlyReport(String path) { // путь к одному файлу
         String content = readFileContentsOrNull(path); // считываем файл и получаем его весь в виде стринга
+        if (content.length() == 0) {
+            return;
+        }
         String[] lines = content.split("\r?\n"); // упаковываем в массивы каждую строчку
         ArrayList<Year.YearRow> yearRows = new ArrayList<>();
 
@@ -37,7 +40,7 @@ public class YearManager {
             return Files.readString(Path.of(path));
         } catch (IOException e) {
             System.out.println("Невозможно прочитать файл с годовым отчётом. Возможно файл не находится в нужной директории.");
-            return null;
+            return "";
         }
     }
 

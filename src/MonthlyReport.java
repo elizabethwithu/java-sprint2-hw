@@ -21,6 +21,10 @@ public class MonthlyReport {
         int monthNumber = Integer.parseInt(path.substring(extensionStartIndex - 2, extensionStartIndex));
 
         String content = readFileContentsOrNull(path);
+        if (content.length() == 0) {
+            return;
+        }
+
         String[] lines = content.split("\r?\n");
         for (int i = 1; i < lines.length; i++) {
             String line = lines[i];
@@ -42,7 +46,7 @@ public class MonthlyReport {
             return Files.readString(Path.of(path));
         } catch (IOException e) {
             System.out.println("Невозможно прочитать файл с месячным отчётом. Возможно файл не находится в нужной директории.");
-            return null;
+            return "";
         }
     }
 

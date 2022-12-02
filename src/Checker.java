@@ -3,12 +3,12 @@ import java.util.HashMap;
 
 public class Checker {
     public MonthlyReport monthlyReport;
-    public YearManager yearManager;
+    public YearlyReport yearlyReport;
 
     // создали конструктор
-    public Checker(MonthlyReport monthlyReport, YearManager yearManager) {
+    public Checker(MonthlyReport monthlyReport, YearlyReport yearlyReport) {
         this.monthlyReport = monthlyReport;
-        this.yearManager = yearManager;
+        this.yearlyReport = yearlyReport;
     }
 
     public void check() {
@@ -16,7 +16,7 @@ public class Checker {
         HashMap<Integer, Integer> yearMonthlyOutcomes = new HashMap<>(); // месяц/расход
         HashMap<Integer, Integer> yearMonthlyProfit = new HashMap<>();
 
-        for (Year.YearRow yearRow : yearManager.year.yearRows) {
+        for (Year.YearRow yearRow : yearlyReport.year.yearRows) {
             if (yearRow.is_expense) {
                 yearMonthlyOutcomes.put(yearRow.month, yearRow.amount);
             } else {

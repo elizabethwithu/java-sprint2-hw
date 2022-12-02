@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        YearManager yearManager = new YearManager();
+        YearlyReport yearlyReport = new YearlyReport();
 
         MonthlyReport monthlyReport = new MonthlyReport();
 
@@ -18,19 +18,29 @@ public class Main {
                monthlyReport.loadFiles();
 
            } else if (command == 2) {
-               yearManager = new YearManager( "resources/y.2021.csv");
+               yearlyReport = new YearlyReport( "resources/y.2021.csv");
 
            } else if (command == 3) {
-              checker = new Checker(monthlyReport, yearManager);
-              checker.check();
+               if (monthlyReport.months.size() > 0 && yearlyReport.year != null) {
+                   checker = new Checker(monthlyReport, yearlyReport);
+                   checker.check();
+               } else {
+                   System.out.println("Отчёты не найдены. Загрузите отчёты.");
+               }
 
            } else if (command == 4) {
-               monthlyReport.printMonthlyReport();
+               if (monthlyReport.months.size() > 0) {
+                   monthlyReport.printMonthlyReport();
+               } else {
+                   System.out.println("Месячные отчёты не найдены. Добавьте месячные отчёты.");
+               }
 
            } else if (command == 5) {
-            // Вывести информацию о годовом отчёте
-               yearManager.printYearlyReport();
-
+               if (yearlyReport.year != null) {
+                   yearlyReport.printYearlyReport();
+               } else {
+                   System.out.println("Годовой отчёт не найден. Добавьте годовой отчёт.");
+               }
 
            } else {
                System.out.println("Введенной команды не существует");
